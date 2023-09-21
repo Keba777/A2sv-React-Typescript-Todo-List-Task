@@ -12,6 +12,17 @@ h2 {
   margin-bottom: 3rem;
 }
 
+.mt-3 {
+  margin-top: 3rem;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Form Styles */
 .form-label {
   display: inline-block;
@@ -127,6 +138,20 @@ li {
 }
 
 .btn-edit:hover {
+  background-color: #a86c4f;
+}
+
+.btn-link {
+  background: #a7775f;
+  font-weight: bolder;
+  font-size: large;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.btn-link:hover {
   background-color: #a86c4f;
 }
 

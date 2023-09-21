@@ -3,6 +3,8 @@ import "./App.css";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import { TodoTask } from "./types/task";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -44,18 +46,31 @@ function App() {
   };
 
   return (
-    <>
-      <TodoForm
-        taskToEdit={taskToEdit}
-        onSubmit={taskToEdit ? handleEditSubmit : handleSubmit}
-      />
-      <TodoList
-        todoTasks={tasks}
-        onEdit={handleEdit}
-        onComplete={handleComplete}
-        onDelete={handleDelete}
-      />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/add"
+          element={
+            <TodoForm
+              taskToEdit={taskToEdit}
+              onSubmit={taskToEdit ? handleEditSubmit : handleSubmit}
+            />
+          }
+        />
+        <Route
+          path="/todos"
+          element={
+            <TodoList
+              todoTasks={tasks}
+              onEdit={handleEdit}
+              onComplete={handleComplete}
+              onDelete={handleDelete}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

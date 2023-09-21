@@ -3,6 +3,8 @@ import EditImage from "../assets/edit.png";
 import CompleteImage from "../assets/complete.png";
 import DeleteImage from "../assets/delete.png";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import TodoForm from "./TodoForm";
 
 interface Props {
   todoTasks: TodoTask[];
@@ -15,10 +17,11 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
   const completedTasks = todoTasks.filter((task) => task.isCompleted);
   const uncompletedTasks = todoTasks.filter((task) => !task.isCompleted);
   const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-3">
         <div className="column container-uncompleted">
           <h2>Tasks</h2>
           {uncompletedTasks.map((task) => (
@@ -34,6 +37,7 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
                       setTaskToEdit(
                         todoTasks.find((t) => t.id === task.id) || null
                       );
+                      navigate("/add");
                     }}
                   >
                     <img className="icons" src={EditImage} alt="Edit Task" />
@@ -71,20 +75,40 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
             <ul className="completed mb-1" key={task.id}>
               <li>
                 <p>{task.description}</p>
-                <button
-                  className="btn-delete"
-                  onClick={() => onDelete(task.id)}
-                >
-                  <img
-                    className="icons"
-                    src={DeleteImage}
-                    alt="Task complete"
-                  />
-                </button>
+                <div>
+                  {/* edit button */}
+                  <button
+                    className="btn-edit"
+                    onClick={() => {
+                      onEdit(task.id);
+                      setTaskToEdit(
+                        todoTasks.find((t) => t.id === task.id) || null
+                      );
+                      navigate("/add");
+                    }}
+                  >
+                    <img className="icons" src={EditImage} alt="Edit Task" />
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => onDelete(task.id)}
+                  >
+                    <img
+                      className="icons"
+                      src={DeleteImage}
+                      alt="Task complete"
+                    />
+                  </button>
+                </div>
               </li>
             </ul>
           ))}
         </div>
+      </div>
+      <div className="center mt-3">
+        <button className="btn-link ">
+          <Link to="/add">Add Tasks</Link>
+        </button>
       </div>
     </>
   );

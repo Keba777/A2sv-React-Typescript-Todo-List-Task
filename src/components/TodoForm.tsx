@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { TodoTask } from "../types/task";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   taskToEdit: TodoTask | null;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const TodoForm = ({ taskToEdit, onSubmit }: Props) => {
+  const navigate = useNavigate();
   const taskInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -26,11 +28,12 @@ const TodoForm = ({ taskToEdit, onSubmit }: Props) => {
       };
       onSubmit(newTask);
       taskInputRef.current!.value = "";
+      navigate("/todos");
     }
   };
 
   return (
-    <form className="mb-3" onSubmit={handleFormSubmit}>
+    <form className="mt-3" onSubmit={handleFormSubmit}>
       <div className="mb-1">
         <label htmlFor="task" className="form-label">
           Task
