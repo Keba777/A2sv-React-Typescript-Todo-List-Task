@@ -13,17 +13,29 @@ function App() {
     { id: 5, description: "Gardening", isCompleted: true },
   ]);
 
+  const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
+
   const handleSubmit = (newTask: TodoTask) => {
     setTasks([...tasks, newTask]);
   };
 
+  const handleEdit = (id: number) => {
+    const taskToEdit = tasks.find((task) => task.id === id);
+    setTaskToEdit(taskToEdit || null);
+  };
+
+  const handleEditSubmit = (editedTask: TodoTask) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === editedTask.id ? editedTask : task
+    );
+    setTasks(updatedTasks);
+    setTaskToEdit(null);
+  };
+
   const handleComplete = (id: number) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, isCompleted: true };
-      }
-      return task;
-    });
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isCompleted: true } : task
+    );
     setTasks(updatedTasks);
   };
 
@@ -33,9 +45,13 @@ function App() {
 
   return (
     <>
-      <TodoForm tasks={tasks} onSubmit={handleSubmit} />
+      <TodoForm
+        taskToEdit={taskToEdit}
+        onSubmit={taskToEdit ? handleEditSubmit : handleSubmit}
+      />
       <TodoList
         todoTasks={tasks}
+        onEdit={handleEdit}
         onComplete={handleComplete}
         onDelete={handleDelete}
       />

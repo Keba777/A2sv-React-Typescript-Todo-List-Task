@@ -1,16 +1,20 @@
 import { TodoTask } from "../types/task";
+import EditImage from "../assets/edit.png";
 import CompleteImage from "../assets/complete.png";
 import DeleteImage from "../assets/delete.png";
+import { useState } from "react";
 
 interface Props {
   todoTasks: TodoTask[];
+  onEdit: (id: number) => void;
   onComplete: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
-const TodoList = ({ todoTasks, onComplete, onDelete }: Props) => {
+const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
   const completedTasks = todoTasks.filter((task) => task.isCompleted);
   const uncompletedTasks = todoTasks.filter((task) => !task.isCompleted);
+  const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
 
   return (
     <>
@@ -22,6 +26,19 @@ const TodoList = ({ todoTasks, onComplete, onDelete }: Props) => {
               <li>
                 <p>{task.description}</p>
                 <div>
+                  {/* edit button */}
+                  <button
+                    className="btn-edit"
+                    onClick={() => {
+                      onEdit(task.id);
+                      setTaskToEdit(
+                        todoTasks.find((t) => t.id === task.id) || null
+                      );
+                    }}
+                  >
+                    <img className="icons" src={EditImage} alt="Edit Task" />
+                  </button>
+                  {/* complete button */}
                   <button
                     className="btn-complete"
                     onClick={() => onComplete(task.id)}
@@ -32,6 +49,7 @@ const TodoList = ({ todoTasks, onComplete, onDelete }: Props) => {
                       alt="Task complete"
                     />
                   </button>
+                  {/* delete button */}
                   <button
                     className="btn-delete"
                     onClick={() => onDelete(task.id)}
@@ -68,7 +86,6 @@ const TodoList = ({ todoTasks, onComplete, onDelete }: Props) => {
           ))}
         </div>
       </div>
-      <span></span>
     </>
   );
 };

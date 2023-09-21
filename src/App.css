@@ -109,7 +109,8 @@ li {
 
 /* Buttons within List */
 .btn-delete,
-.btn-complete {
+.btn-complete,
+.btn-edit {
   background: transparent;
   border: none;
   border-radius: 5px;
@@ -123,6 +124,10 @@ li {
 
 .btn-complete:hover {
   background-color: #104c64;
+}
+
+.btn-edit:hover {
+  background-color: #a86c4f;
 }
 
 /* Icons */

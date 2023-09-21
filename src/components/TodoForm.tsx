@@ -1,22 +1,28 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { TodoTask } from "../types/task";
 
 interface Props {
-  tasks: TodoTask[]; // Define tasks as a prop
-  onSubmit: (newTask: TodoTask) => void;
+  taskToEdit: TodoTask | null;
+  onSubmit: (task: TodoTask) => void;
 }
 
-const TodoForm = ({ tasks, onSubmit }: Props) => {
+const TodoForm = ({ taskToEdit, onSubmit }: Props) => {
   const taskInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (taskToEdit && taskInputRef.current) {
+      taskInputRef.current.value = taskToEdit.description;
+    }
+  }, [taskToEdit]);
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const description = taskInputRef.current?.value;
     if (description) {
       const newTask: TodoTask = {
-        id: Math.max(...tasks.map((task) => task.id), 0) + 1,
+        id: taskToEdit?.id || Math.floor(Math.random() * 1000), // Use existing ID or generate a new one
         description,
-        isCompleted: false,
+        isCompleted: taskToEdit ? taskToEdit.isCompleted : false,
       };
       onSubmit(newTask);
       taskInputRef.current!.value = "";
@@ -37,7 +43,7 @@ const TodoForm = ({ tasks, onSubmit }: Props) => {
         />
       </div>
       <button className="btn-submit" type="submit">
-        Add Task
+        {taskToEdit ? "Update Task" : "Add Task"}
       </button>
     </form>
   );
