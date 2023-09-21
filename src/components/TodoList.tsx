@@ -2,9 +2,7 @@ import { TodoTask } from "../types/task";
 import EditImage from "../assets/edit.png";
 import CompleteImage from "../assets/complete.png";
 import DeleteImage from "../assets/delete.png";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import TodoForm from "./TodoForm";
 
 interface Props {
   todoTasks: TodoTask[];
@@ -16,8 +14,12 @@ interface Props {
 const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
   const completedTasks = todoTasks.filter((task) => task.isCompleted);
   const uncompletedTasks = todoTasks.filter((task) => !task.isCompleted);
-  const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
   const navigate = useNavigate();
+
+  const handleEditClick = (taskId: number) => {
+    onEdit(taskId);
+    navigate(`/edit/${taskId}`); // Navigate to the correct edit route
+  };
 
   return (
     <>
@@ -32,13 +34,7 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
                   {/* edit button */}
                   <button
                     className="btn-edit"
-                    onClick={() => {
-                      onEdit(task.id);
-                      setTaskToEdit(
-                        todoTasks.find((t) => t.id === task.id) || null
-                      );
-                      navigate("/add");
-                    }}
+                    onClick={() => handleEditClick(task.id)} // Use handleEditClick to trigger routing
                   >
                     <img className="icons" src={EditImage} alt="Edit Task" />
                   </button>
@@ -79,13 +75,7 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
                   {/* edit button */}
                   <button
                     className="btn-edit"
-                    onClick={() => {
-                      onEdit(task.id);
-                      setTaskToEdit(
-                        todoTasks.find((t) => t.id === task.id) || null
-                      );
-                      navigate("/add");
-                    }}
+                    onClick={() => handleEditClick(task.id)} // Use handleEditClick to trigger routing
                   >
                     <img className="icons" src={EditImage} alt="Edit Task" />
                   </button>
