@@ -23,39 +23,43 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
 
   return (
     <>
-      <div className="container mt-3">
-        <div className="column container-uncompleted">
-          <h2>Tasks</h2>
+      <h1 className="text-5xl font-bold flex  justify-center">My Tasks</h1>
+      <div className=" p-6 min-w-full md:grid grid-cols-2 gap-4 ">
+        <div className=" bg-slate-900 flex flex-col items-center justify-center pt-4 pb-8 rounded-lg mb-4">
+          <h2 className="text-3xl mb-3">Tasks</h2>
           {uncompletedTasks.map((task) => (
-            <ul className="uncompleted mb-1" key={task.id}>
+            <ul
+              className=" bg-slate-600 text-white text-lg list-none w-4/5 rounded p-2 mb-4"
+              key={task.id}
+            >
               <li>
                 <p>{task.description}</p>
                 <div>
                   {/* edit button */}
                   <button
-                    className="btn-edit"
+                    className="cursor-pointer p-1 hover:bg-slate-700 rounded-xl"
                     onClick={() => handleEditClick(task.id)} // Use handleEditClick to trigger routing
                   >
-                    <img className="icons" src={EditImage} alt="Edit Task" />
+                    <img className="  w-5 " src={EditImage} alt="Edit Task" />
                   </button>
                   {/* complete button */}
                   <button
-                    className="btn-complete"
+                    className="cursor-pointer p-1 hover:bg-slate-700 rounded-xl"
                     onClick={() => onComplete(task.id)}
                   >
                     <img
-                      className="icons"
+                      className="w-5"
                       src={CompleteImage}
                       alt="Task complete"
                     />
                   </button>
                   {/* delete button */}
                   <button
-                    className="btn-delete"
+                    className="cursor-pointer p-1 hover:bg-slate-700 rounded-xl"
                     onClick={() => onDelete(task.id)}
                   >
                     <img
-                      className="icons"
+                      className="w-5"
                       src={DeleteImage}
                       alt="Task complete"
                     />
@@ -65,26 +69,29 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
             </ul>
           ))}
         </div>
-        <div className="column container-completed">
-          <h2>Completed Tasks</h2>
+        <div className=" bg-orange-950 flex flex-col items-center justify-center pt-4 pb-8 rounded-lg mb-4">
+          <h2 className="text-3xl mb-3">Completed Tasks</h2>
           {completedTasks.map((task) => (
-            <ul className="completed mb-1" key={task.id}>
+            <ul
+              className=" bg-orange-800 text-white text-lg list-none w-4/5 rounded p-2 mb-4"
+              key={task.id}
+            >
               <li>
                 <p>{task.description}</p>
                 <div>
                   {/* edit button */}
                   <button
-                    className="btn-edit"
+                    className="cursor-pointer p-1 hover:bg-orange-900 rounded-xl"
                     onClick={() => handleEditClick(task.id)} // Use handleEditClick to trigger routing
                   >
-                    <img className="icons" src={EditImage} alt="Edit Task" />
+                    <img className="w-5" src={EditImage} alt="Edit Task" />
                   </button>
                   <button
-                    className="btn-delete"
+                    className="cursor-pointer p-1 hover:bg-orange-900 rounded-xl"
                     onClick={() => onDelete(task.id)}
                   >
                     <img
-                      className="icons"
+                      className="w-5"
                       src={DeleteImage}
                       alt="Task complete"
                     />
@@ -95,8 +102,8 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
           ))}
         </div>
       </div>
-      <div className="center mt-3">
-        <button className="btn-link ">
+      <div className="flex justify-center ">
+        <button className=" bg-sky-900 text-white text-xl cursor-pointer p-3 rounded w-1/3 hover:bg-sky-950 ">
           <Link to="/add">Add Tasks</Link>
         </button>
       </div>

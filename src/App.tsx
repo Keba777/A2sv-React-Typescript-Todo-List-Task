@@ -13,6 +13,11 @@ function App() {
     { id: 3, description: "Praying", isCompleted: true },
     { id: 4, description: "Walking", isCompleted: false },
     { id: 5, description: "Gardening", isCompleted: true },
+    { id: 6, description: "Exercising", isCompleted: true },
+    { id: 7, description: "Cooking", isCompleted: false },
+    { id: 8, description: "Cleaning", isCompleted: true },
+    { id: 9, description: "Learning", isCompleted: false },
+    { id: 10, description: "Meeting", isCompleted: true },
   ]);
 
   const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
