@@ -15,12 +15,12 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `Routes`
+
 This application utilizes React Router for navigation and has the following routes: \
 
-/ - Home page displaying "Todo Lists" and a link to view tasks. \
+/ - Home page Displays the list of tasks with options to edit, complete, or delete them.\ \
 /add - Allows you to add new tasks. \
 /edit/:id - Allows you to edit a specific task based on its ID. \
-/todos - Displays the list of tasks with options to edit, complete, or delete them.\
 
 ## Learn More
 
