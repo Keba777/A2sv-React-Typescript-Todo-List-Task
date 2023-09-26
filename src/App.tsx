@@ -4,7 +4,6 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import { TodoTask } from "./types/task";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./components/HomePage";
 import EditTodoForm from "./components/EditTodoForm";
 
 function App() {
@@ -49,7 +48,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route
           path="/add"
           element={<TodoForm taskToEdit={null} onSubmit={handleSubmit} />}
@@ -59,7 +57,7 @@ function App() {
           element={<EditTodoForm tasks={tasks} onSubmit={handleEditSubmit} />}
         />
         <Route
-          path="/todos"
+          path="/"
           element={
             <TodoList
               todoTasks={tasks}

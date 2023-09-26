@@ -28,7 +28,7 @@ const TodoForm = ({ taskToEdit, onSubmit }: Props) => {
       };
       onSubmit(newTask);
       taskInputRef.current!.value = "";
-      navigate("/todos");
+      navigate("/");
     }
   };
 
