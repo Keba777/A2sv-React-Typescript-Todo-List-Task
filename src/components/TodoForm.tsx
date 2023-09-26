@@ -33,22 +33,31 @@ const TodoForm = ({ taskToEdit, onSubmit }: Props) => {
   };
 
   return (
-    <form className="mt-3" onSubmit={handleFormSubmit}>
-      <div className="mb-1">
-        <label htmlFor="task" className="form-label">
-          Task
-        </label>
-        <input
-          ref={taskInputRef}
-          id="task"
-          type="text"
-          className="form-input"
-        />
-      </div>
-      <button className="btn-submit" type="submit">
-        {taskToEdit ? "Update Task" : "Add Task"}
-      </button>
-    </form>
+    <div className=" p-6 min-w-full flex items-center justify-center mt-10">
+      <form
+        className="bg-slate-800 w-3/5 p-8 rounded-lg"
+        onSubmit={handleFormSubmit}
+      >
+        <div className="mb-4">
+          <label htmlFor="task" className="block text-lg text-white mb-1">
+            Task
+          </label>
+          <input
+            ref={taskInputRef}
+            id="task"
+            type="text"
+            placeholder=" Reading Newspaper..."
+            className="w-full rounded h-10 border bg-slate-200"
+          />
+        </div>
+        <button
+          className="cursor-pointer ms-48 w-2/5 bg-yellow-800 p-2 rounded text-xl text-white hover:bg-yellow-900"
+          type="submit"
+        >
+          {taskToEdit ? "Update Task" : "Add Task"}
+        </button>
+      </form>
+    </div>
   );
 };
 

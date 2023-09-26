@@ -26,13 +26,13 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
       <h1 className="text-5xl font-bold flex  justify-center">My Tasks</h1>
       <div className=" p-6 min-w-full md:grid grid-cols-2 gap-4 ">
         <div className=" bg-slate-900 flex flex-col items-center justify-center pt-4 pb-8 rounded-lg mb-4">
-          <h2 className="text-3xl mb-3">Tasks</h2>
+          <h2 className="text-white text-3xl mb-3">Tasks</h2>
           {uncompletedTasks.map((task) => (
             <ul
               className=" bg-slate-600 text-white text-lg list-none w-4/5 rounded p-2 mb-4"
               key={task.id}
             >
-              <li>
+              <li className="flex justify-between">
                 <p>{task.description}</p>
                 <div>
                   {/* edit button */}
@@ -40,7 +40,7 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
                     className="cursor-pointer p-1 hover:bg-slate-700 rounded-xl"
                     onClick={() => handleEditClick(task.id)} // Use handleEditClick to trigger routing
                   >
-                    <img className="  w-5 " src={EditImage} alt="Edit Task" />
+                    <img className="w-5" src={EditImage} alt="Edit Task" />
                   </button>
                   {/* complete button */}
                   <button
@@ -70,13 +70,13 @@ const TodoList = ({ todoTasks, onEdit, onComplete, onDelete }: Props) => {
           ))}
         </div>
         <div className=" bg-orange-950 flex flex-col items-center justify-center pt-4 pb-8 rounded-lg mb-4">
-          <h2 className="text-3xl mb-3">Completed Tasks</h2>
+          <h2 className="text-white text-3xl mb-3">Completed Tasks</h2>
           {completedTasks.map((task) => (
             <ul
               className=" bg-orange-800 text-white text-lg list-none w-4/5 rounded p-2 mb-4"
               key={task.id}
             >
-              <li>
+              <li className="flex justify-between">
                 <p>{task.description}</p>
                 <div>
                   {/* edit button */}
